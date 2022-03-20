@@ -1,5 +1,5 @@
 package com.migros.ordermanagement.converter;
-;
+
 import com.migros.ordermanagement.model.dto.OrderDto;
 import com.migros.ordermanagement.persistence.entity.OrderEntity;
 import lombok.AccessLevel;

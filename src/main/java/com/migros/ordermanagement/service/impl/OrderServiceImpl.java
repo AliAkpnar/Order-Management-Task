@@ -86,9 +86,6 @@ public class OrderServiceImpl implements OrderService {
         CustomerEntity customerEntity = customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
         Optional<OrderEntity> orderEntity = Optional.ofNullable(orderRepository.findById(orderId)
                 .orElseThrow(OrderNotFoundException::new));
-/*        if (orderEntity.getId() != null && !orderEntity.getCustomerEntity().getId().equals(customerEntity.getId())){
-            throw new CustomerOrderNotFoundException();
-        }*/
         orderEntity
                 .map(OrderEntity::getCustomerEntity)
                 .map(CustomerEntity::getId)

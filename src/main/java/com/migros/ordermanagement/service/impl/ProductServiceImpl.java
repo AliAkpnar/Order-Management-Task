@@ -76,9 +76,6 @@ public class ProductServiceImpl implements ProductService {
         OrderEntity orderEntity = orderRepository.findById(orderId).orElseThrow(OrderNotFoundException::new);
         Optional<ProductEntity> productEntity = Optional.ofNullable(productRepository.findById(productId)
                 .orElseThrow(ProductNotFoundException::new));
-/*        if (productEntity.getId() != null && !productEntity.getOrder().getId().equals(orderEntity.getId())){
-            throw new OrderProductNotFoundException();
-        }*/
         productEntity
                 .map(ProductEntity::getOrder)
                 .map(OrderEntity::getId)
