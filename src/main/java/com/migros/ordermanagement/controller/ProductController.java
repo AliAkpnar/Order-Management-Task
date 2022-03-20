@@ -20,8 +20,8 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<ProductDto> getAllProducts(){
-        return productService.getAllProducts();
+    public ResponseEntity<List<ProductDto>> getAllProducts(){
+        return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/{orderId}")
@@ -30,8 +30,8 @@ public class ProductController {
     }
 
     @PostMapping("/save/{orderId}")
-    public ProductDto saveProduct(@PathVariable(value = "orderId") long orderId, @Valid @RequestBody ProductRequest productRequest){
-        return productService.saveProduct(orderId, productRequest);
+    public ResponseEntity<ProductDto> saveProduct(@PathVariable(value = "orderId") long orderId, @Valid @RequestBody ProductRequest productRequest){
+        return ResponseEntity.ok(productService.saveProduct(orderId, productRequest));
     }
 
     @PutMapping("/{orderId}/product/{productId}")

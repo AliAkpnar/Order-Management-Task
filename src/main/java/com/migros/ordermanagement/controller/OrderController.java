@@ -18,8 +18,8 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    public List<OrderDto> getAllOrders(){
-        return orderService.getAllOrders();
+    public ResponseEntity<List<OrderDto>> getAllOrders(){
+        return ResponseEntity.ok(orderService.getAllOrders());
     }
 
     @GetMapping("/{customerId}")

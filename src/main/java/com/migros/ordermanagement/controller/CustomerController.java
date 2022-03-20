@@ -35,8 +35,8 @@ public class CustomerController {
     }
 
     @PostMapping("/save")
-    public CustomerDto saveCustomer(@Valid @RequestBody CustomerRequest customerRequest){
-        return customerService.saveCustomer(customerRequest);
+    public ResponseEntity<CustomerDto> saveCustomer(@Valid @RequestBody CustomerRequest customerRequest){
+        return ResponseEntity.ok(customerService.saveCustomer(customerRequest));
     }
 
     @PutMapping("/{id}")
