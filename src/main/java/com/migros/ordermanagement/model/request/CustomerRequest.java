@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
 public class CustomerRequest {
     @NotNull
     private String firstname;

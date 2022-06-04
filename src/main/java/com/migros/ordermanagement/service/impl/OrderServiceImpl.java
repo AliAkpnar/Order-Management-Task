@@ -1,6 +1,5 @@
 package com.migros.ordermanagement.service.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.migros.ordermanagement.advice.exception.*;
 import com.migros.ordermanagement.converter.OrderEntityConverter;
 import com.migros.ordermanagement.model.dto.*;
@@ -11,7 +10,6 @@ import com.migros.ordermanagement.persistence.repository.CustomerRepository;
 import com.migros.ordermanagement.persistence.repository.OrderRepository;
 import com.migros.ordermanagement.model.request.OrderRequest;
 import com.migros.ordermanagement.persistence.repository.ProductRepository;
-import com.migros.ordermanagement.service.LogService;
 import com.migros.ordermanagement.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +21,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
-@RequiredArgsConstructor
 @Slf4j
+@Service
 @Transactional
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;

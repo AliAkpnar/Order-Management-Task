@@ -27,10 +27,10 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 
-@Service
-@RequiredArgsConstructor
 @Slf4j
+@Service
 @Transactional
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
@@ -47,14 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
         List<CustomerDto> content = listOfCustomer.stream()
                 .map(CustomerEntityConverter::toMapCustomerDto)
                 .collect(Collectors.toList());
-        CustomerPageResponse customerPageResponse = new CustomerPageResponse();
-        customerPageResponse.setContents(content);
-        customerPageResponse.setPageNo(customerEntities.getNumber());
-        customerPageResponse.setPageSize(customerEntities.getSize());
-        customerPageResponse.setTotalElement(customerEntities.getTotalElements());
-        customerPageResponse.setTotalPages(customerEntities.getTotalPages());
-        customerPageResponse.setLast(customerEntities.isLast());
-        return customerPageResponse;
+        return getCustomerPageResponse(customerEntities, content);
     }
 
     @Override
@@ -87,6 +80,17 @@ public class CustomerServiceImpl implements CustomerService {
         customerEntity.setPhoneNumber(customerRequest.getPhoneNumber());
         CustomerEntity updateCustomer = customerRepository.save(customerEntity);
         return CustomerEntityConverter.toMapCustomerDto(updateCustomer);
+    }
+
+    private CustomerPageResponse getCustomerPageResponse(Page<CustomerEntity> customerEntities, List<CustomerDto> content) {
+        CustomerPageResponse customerPageResponse = new CustomerPageResponse();
+        customerPageResponse.setContents(content);
+        customerPageResponse.setPageNo(customerEntities.getNumber());
+        customerPageResponse.setPageSize(customerEntities.getSize());
+        customerPageResponse.setTotalElement(customerEntities.getTotalElements());
+        customerPageResponse.setTotalPages(customerEntities.getTotalPages());
+        customerPageResponse.setLast(customerEntities.isLast());
+        return customerPageResponse;
     }
 
     private CustomerEntity mapToEntity(CustomerRequest customerRequest) {

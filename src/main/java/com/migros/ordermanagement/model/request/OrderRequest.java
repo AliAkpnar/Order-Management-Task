@@ -19,6 +19,6 @@ public class OrderRequest {
     @Min(value = 1, message = "Order quantity must have at least one!")
     private int quantity;
     private String orderName;
-    @Future(message = "Must be a date in the present or in the feature!")
+    @Future(message = "Must be a date in the feature!")
     private Instant orderDate;
 }

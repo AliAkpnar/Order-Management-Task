@@ -19,10 +19,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
-@RequiredArgsConstructor
 @Slf4j
+@Service
 @Transactional
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
