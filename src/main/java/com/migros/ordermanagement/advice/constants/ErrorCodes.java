@@ -13,4 +13,5 @@ public class ErrorCodes {
     public static final int PRODUCT_DOES_NOT_EXIST_BELONG_TO_ORDER = 106;
     public static final int PRODUCT_NOT_FOUND = 107;
     public static final int VALIDATION_ERROR = 108;
+    public static final int MANAGEMENT = 109;
 }

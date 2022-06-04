@@ -24,6 +24,10 @@ logging:
       springframework:
         security: DEBUG
 
+app:
+  jwt-secret: JWTSecretKey
+  jwt-expiration-milliseconds: 604800000
+
 springfox:
   documentation:
     enabled: ${SWAGGER_ENABLED:true}

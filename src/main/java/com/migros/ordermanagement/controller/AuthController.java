@@ -2,10 +2,12 @@ package com.migros.ordermanagement.controller;
 
 import com.migros.ordermanagement.model.dto.LoginDto;
 import com.migros.ordermanagement.model.dto.SignUpDto;
+import com.migros.ordermanagement.model.response.JWTAuthResponse;
 import com.migros.ordermanagement.persistence.entity.Role;
 import com.migros.ordermanagement.persistence.entity.User;
 import com.migros.ordermanagement.persistence.repository.RoleRepository;
 import com.migros.ordermanagement.persistence.repository.UserRepository;
+import com.migros.ordermanagement.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +33,21 @@ public class AuthController {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider tokenProvider;
 
     @PostMapping("/sign-in")
+    public ResponseEntity<JWTAuthResponse> authenticateUser(@RequestBody LoginDto loginDto){
+        Authentication authentication = authenticationManager
+                .authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                loginDto.getUsernameOrEmail(), loginDto.getPassword())
+                );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = tokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(new JWTAuthResponse(token));
+    }
+
+/*    @PostMapping("/sign-in")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager
                 .authenticate(
@@ -41,7 +56,8 @@ public class AuthController {
                 );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("User signed-in successfully", HttpStatus.OK);
-    }
+    }*/
+
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
