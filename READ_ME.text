@@ -1,0 +1,7 @@
+ROLE_ADMIN =>
+username = rootadmin
+password = root
+
+ROLE_USER =>
+username = rootuser
+password = root
