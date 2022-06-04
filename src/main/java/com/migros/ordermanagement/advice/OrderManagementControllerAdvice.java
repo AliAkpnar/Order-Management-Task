@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class BaseControllerAdvice {
+public class OrderManagementControllerAdvice {
     @ExceptionHandler(BaseRuntimeException.class)
     public ResponseEntity<ErrorResponse> handleException(BaseRuntimeException e) {
         return ResponseEntity.status(e.getStatus()).body(ErrorResponse.of(e));

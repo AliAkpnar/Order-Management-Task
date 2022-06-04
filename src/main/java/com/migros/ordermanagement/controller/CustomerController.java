@@ -7,6 +7,7 @@ import com.migros.ordermanagement.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -34,11 +35,13 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getCustomerById(id));
     }
 
+    /*@PreAuthorize("hasRole('ADMIN')")*/
     @PostMapping("/save")
     public ResponseEntity<CustomerDto> saveCustomer(@Valid @RequestBody CustomerRequest customerRequest){
         return ResponseEntity.ok(customerService.saveCustomer(customerRequest));
     }
 
+    /*@PreAuthorize("hasRole('ADMIN')")*/
     @PutMapping("/{id}")
     public ResponseEntity<CustomerDto> updateCustomer(@RequestBody CustomerRequest customerRequest,
                                                       @PathVariable(name = "id") long id){
